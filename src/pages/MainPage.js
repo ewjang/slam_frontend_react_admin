@@ -9,13 +9,10 @@ function MainPage(props) {
             <div>
                 <Link to={'/about'}>About</Link>
             </div>
-
-
             <div>Main Page</div>
-
         </div>
-
          */
+
         <BasicLayout>
             <div className={'text-3xl'}>Main Page</div>
         </BasicLayout>
