@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getOne} from "../../api/todoApi";
+import useCustomMove from "../../hooks/useCustomMove";
 
 const initState = {
     tno:0 ,
@@ -13,8 +14,11 @@ function ReadComponent({tno}) {
 
     const [todo, setTodo] = useState(initState)
 
-    useEffect(() => {
+    //custom hook > jsp include와 유사
+    const {moveToList} = useCustomMove()
 
+    useEffect(() => {
+    //화면 상태 값 변경 체크 후 렌더링
         getOne(tno).then(data => {
             console.log(data);
             setTodo(data)
@@ -29,6 +33,17 @@ function ReadComponent({tno}) {
             {makeDiv('Title', todo.title)}
             {makeDiv('Due Date', todo.dueDate)}
             {makeDiv('Complete', todo.complete ? 'Completed' : 'Not Yet')}
+
+            <div className="flex justify-end p-4">
+                <button type="button"
+                        className="rounded p-4 m-2 text-xl w-32 text-white bg-blue-500"
+                        onClick={() => moveToList()}
+                >
+                    List
+                </button>
+            </div>
+
+
         </div>
     );
 }
