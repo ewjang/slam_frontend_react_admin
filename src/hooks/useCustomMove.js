@@ -22,6 +22,7 @@ const useCustomMove = () => {
 
 
     const moveToList = (pageParam) => {
+        debugger;
         let queryStr = ""
         if(pageParam){
             const pageNum = getNum(pageParam.page, 1)
@@ -34,7 +35,22 @@ const useCustomMove = () => {
 
     }
 
-    return {moveToList}
+    const moveToModify = (num) => {
+        navigate({
+            pathname: `../modify/${num}`,
+            search:queryDefault
+        })
+    }
+
+    const moveToRead = (num) => {
+        debugger
+        navigate({
+            pathname: `../read/${num}`,
+            search:queryDefault
+        })
+    }
+
+    return {moveToList,moveToModify, moveToRead, page, size}
 
 }
 
