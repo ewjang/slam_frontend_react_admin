@@ -1,5 +1,8 @@
 import { useState, useRef } from 'react'
 import { postAdd } from '../../api/productApi'
+import FetchingModal from '../common/FetchingModal'
+import ResultModal from '../common/ResultModal'
+import useCustomMove from '../../hooks/useCustomMove'
 
 const initState = {
     pname: '',
@@ -17,7 +20,10 @@ function AddComponent(props) {
     const uploadRef = useRef()
 
     //multipart/form-data
+    const [fetching, setFetching] = useState(false)
+    const [result, setResult] = useState(false)
 
+    const {moveToList} = useCustomMove()
 
     const handleChangeProduct = (e) => {
         product[e.target.name] = e.target.value
@@ -39,15 +45,19 @@ function AddComponent(props) {
         formData.append('pdesc', product.pdesc)
         formData.append('price', product.price)
 
-
-
         console.log(files)
+        setFetching(true)
+        postAdd(formData).then(data => {
+          setFetching(false)
+          setResult(data.result)
+        })
 
-        postAdd(formData)
-
-        
-        
     }
+
+  const closeModal =() => {
+    setResult(false)
+    moveToList({page:1})
+  }
 
   return (
     <div className = "border-2 border-sky-200 mt-10 m-2 p-4"> 
@@ -111,6 +121,8 @@ function AddComponent(props) {
       
       </div>
     </div>
+    {fetching ? <FetchingModal /> : <></>}
+    {result ? <ResultModal title={"Product Add Result"} content={`${result}번 상품 등록 완료`} callbackFn={closeModal} /> : <></>}
   </div>
 
   );
