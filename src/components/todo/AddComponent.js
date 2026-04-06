@@ -19,17 +19,12 @@ const AddComponent = () => {
   const {moveToList} = useCustomMove() //useCustomMove 활용 
 
   const handleChangeTodo = (e) => {
-
     todo[e.target.name] = e.target.value
-
     setTodo({...todo})
   }
-
-
-
+   
 
   const handleClickAdd = () => {
-
     //console.log(todo)
     postAdd(todo)
     .then(result => {
@@ -44,7 +39,6 @@ const AddComponent = () => {
   }
 
   const closeModal = () => {
-
     setResult(null)
     moveToList()  //moveToList( )호출 
 

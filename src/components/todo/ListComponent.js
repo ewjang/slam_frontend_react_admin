@@ -45,10 +45,8 @@ const ListComponent = (props) => {
         key= {todo.tno} 
         className="w-full min-w-[400px]  p-2 m-2 rounded shadow-md"
         onClick={() =>  moveToRead(todo.tno)} //이벤트 처리 추가
-
-        >  
-  
-          <div className="flex ">
+        >
+          <div className="flex">
             <div className="font-extrabold text-2xl p-2 w-1/12">
               {todo.tno}
             </div>
@@ -66,9 +64,7 @@ const ListComponent = (props) => {
       <PageComponent serverData={serverData} movePage={moveToList}></PageComponent>
   
     </div>
-  
     );
-  
 }
  
 export default ListComponent;
